@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.theair.R
 import com.example.theair.core.helpers.TransitionType
 import com.example.theair.core.utils.FragmentUtil
+import com.example.theair.presentation.view.fragment.MovieListFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -13,12 +14,12 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
 
-//        if (savedInstanceState == null) {
-//            FragmentUtil.replaceFragment(
-//                this,
-//                PostsFragment(), false, TransitionType.NONE, PostsFragment.TAG
-//            )
-//        }
+        if (savedInstanceState == null) {
+            FragmentUtil.replaceFragment(
+                this,
+                MovieListFragment(), false, TransitionType.NONE, MovieListFragment.TAG
+            )
+        }
 
     }
 }
