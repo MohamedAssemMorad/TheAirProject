@@ -5,17 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.Observer
 import com.example.theair.BaseFragment
 import com.example.theair.R
+import com.example.theair.core.utils.FragmentUtil
+import com.example.theair.data.model.MovieResultsResponse
+import com.example.theair.presentation.view.adapter.MovieListAdapter
 import com.example.theair.presentation.viewmodel.MovieListViewModel
+import kotlinx.android.synthetic.main.fragment_movie_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieListFragment : BaseFragment() {
 
-    //    private var postsList: ArrayList<PostsResult>? = null
+    private var moviesList: ArrayList<MovieResultsResponse>? = null
     private val movieListViewModel: MovieListViewModel by viewModel()
+    private var movieListAdapter: MovieListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,26 +37,37 @@ class MovieListFragment : BaseFragment() {
         getMovieList()
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun adapterProcess() {
+        movieListAdapter = MovieListAdapter(
+            mContext,
+            moviesList,
+            onItemClicked = { resultsItem: MovieResultsResponse? ->
+//                FragmentUtil.replaceFragment(
+//                    activity as AppCompatActivity,
+//                    CaseRequestDetailsFragment.newInstance(resultsItem?.RequestID),
+//                    true,
+//                    TAG = CaseRequestDetailsFragment.TAG
+//                )
+            })
+        rvMoviesList?.adapter = movieListAdapter
     }
 
     private fun getMovieList() {
-//        postsList?.clear()
-//        pbLoader.visibility = View.VISIBLE
-        movieListViewModel.callGetMovieList(1)
+        moviesList?.clear()
+        pbLoader.visibility = View.VISIBLE
+        movieListViewModel.callGetMovieList(1, 1, "vote_average.desc")
             .observe(this, Observer {
-//                pbLoader.visibility = View.GONE
+                pbLoader.visibility = View.GONE
+                if (!it?.results.isNullOrEmpty()) {
 
-                if (it != null) {
-
+                    moviesList = it?.results!!
 //                    GlobalScope.launch {
 //                        postsViewModel.callDeletePostsLocally()
 //                        postsViewModel.savePosts(postsList!!)
 //                    }
-//                    adapterProcess()
+                    adapterProcess()
                 } else {
-                    Toast.makeText(mContext, "", Toast.LENGTH_LONG).show()
+                    Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_LONG).show()
                 }
             })
     }

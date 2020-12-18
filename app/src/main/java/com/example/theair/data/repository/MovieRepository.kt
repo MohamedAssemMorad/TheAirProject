@@ -7,9 +7,11 @@ import com.example.theair.data.network.MovieAPIController
 open class MovieRepository(private val apiController: MovieAPIController) {
 
     fun callGetMovieList(
-        id: Int
+        id: Int,
+        pageNum: Int,
+        sortBy: String
     ): LiveData<MovieResponse?> {
-        return (apiController).getMovieList(id)
+        return (apiController).getMovieList(id, pageNum, sortBy)
     }
 
 }

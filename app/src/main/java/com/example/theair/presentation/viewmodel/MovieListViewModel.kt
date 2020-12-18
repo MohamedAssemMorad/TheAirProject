@@ -9,7 +9,10 @@ public class MovieListViewModel(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-    fun callGetMovieList(id: Int): LiveData<MovieResponse?> {
-        return repository.callGetMovieList(id)
+    fun callGetMovieList(
+        id: Int, pageNum: Int,
+        sortBy: String
+    ): LiveData<MovieResponse?> {
+        return repository.callGetMovieList(id, pageNum, sortBy)
     }
 }

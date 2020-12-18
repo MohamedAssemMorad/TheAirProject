@@ -8,12 +8,12 @@ import retrofit2.Response
 
 object MovieAPIController {
 
-    fun getMovieList(id: Int?): MutableLiveData<MovieResponse> {
+    fun getMovieList(id: Int?, pageNum: Int, sortBy: String): MutableLiveData<MovieResponse> {
 
         val data = MutableLiveData<MovieResponse>()
 
         if (getAppService() != null) {
-            getAppService()?.callGetMovieList(id)
+            getAppService()?.callGetMovieList(id, pageNum, sortBy)
                 ?.enqueue(object : Callback<MovieResponse?> {
                     override fun onResponse(
                         call: Call<MovieResponse?>,

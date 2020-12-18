@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -59,4 +61,7 @@ dependencies {
     // koin dependency injection library
     implementation 'org.koin:koin-android:2.0.1'
     implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
+
+    // picasso for set images
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
