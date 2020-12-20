@@ -3,4 +3,10 @@
     <string name="no_connection">No Connection!</string>
     <string name="check_connection">Please check your internet connection.</string>
     <string name="try_again">Try Again</string>
+    <string name="title">Title</string>
+    <string name="overview">Overview</string>
+    <string name="genre">Genre</string>
+    <string name="rating">Rating</string>
+    <string name="cast">Click to see All Cast</string>
+    <string name="recommendations">Recommendations</string>
 </resources>

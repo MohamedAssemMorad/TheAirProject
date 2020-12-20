@@ -10,13 +10,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 import com.example.theair.core.utils.NetworkUtil
+import com.example.theair.presentation.view.customviews.HomeToolbar
 
 open class BaseFragment : Fragment() {
 
+    lateinit var homeToolbar: HomeToolbar
     lateinit var contentContainer: FrameLayout
     lateinit var llNoInternet: LinearLayoutCompat
     lateinit var tvTryAgain: AppCompatTextView
@@ -31,7 +34,9 @@ open class BaseFragment : Fragment() {
         val parentView = inflater.inflate(R.layout.fragment_base, container, false)
 
 
-        setHasOptionsMenu(true)
+        // toolbar layout
+        homeToolbar = parentView.findViewById(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(homeToolbar)
 
         // no internet connection layout
         llNoInternet = parentView.findViewById(R.id.llNoInternet)
@@ -65,6 +70,14 @@ open class BaseFragment : Fragment() {
             e.printStackTrace();
         }
         super.onPause()
+    }
+
+    open fun toolbarProcess() {
+        homeToolbar.showBackIcon(activity as AppCompatActivity)
+        //homeToolbar.hideMenu()
+        homeToolbar.setNavigationOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
     }
 
     open fun internetCheckProcess() {

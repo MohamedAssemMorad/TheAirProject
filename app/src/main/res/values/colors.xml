@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="content_grey">#7d8698</color>
     <color name="boarder_gray">#dee2e8</color>
+    <color name="colorPrimary">#0d253f</color>
+    <color name="colorPrimaryDark">#01b4e4</color>
+    <color name="colorAccent">#90cea1</color>
+    <color name="white_transparent">#00ffffff</color>
+    <color name="action_bar">#ffffff</color>
+
 </resources>

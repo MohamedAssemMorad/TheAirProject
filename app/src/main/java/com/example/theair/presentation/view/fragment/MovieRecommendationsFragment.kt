@@ -6,22 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import com.example.theair.BaseFragment
 import com.example.theair.R
 import com.example.theair.core.utils.FragmentUtil
 import com.example.theair.data.model.MovieResultsResponse
-import com.example.theair.presentation.view.adapter.MovieListAdapter
-import com.example.theair.presentation.viewmodel.MovieListViewModel
-import kotlinx.android.synthetic.main.fragment_movie_list.*
+import com.example.theair.presentation.view.adapter.MovieRecommendationsAdapter
+import com.example.theair.presentation.viewmodel.MovieRecommendationsViewModel
+import kotlinx.android.synthetic.main.fragment_movie_list.pbLoader
+import kotlinx.android.synthetic.main.fragment_movie_recommendations.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieListFragment : BaseFragment() {
+class MovieRecommendationsFragment : BaseFragment() {
 
-    private var moviesList: ArrayList<MovieResultsResponse>? = null
-    private val movieListViewModel: MovieListViewModel by viewModel()
-    private var movieListAdapter: MovieListAdapter? = null
+    private var moviesRecommendations: ArrayList<MovieResultsResponse>? = null
+    private val movieRecommendationsViewModel: MovieRecommendationsViewModel by viewModel()
+    private var movieListAdapter: MovieRecommendationsAdapter? = null
+    private var movieId: Int? = 315635
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,14 +32,13 @@ class MovieListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val parentView = super.onCreateView(inflater, container, savedInstanceState)
-        inflater.inflate(R.layout.fragment_movie_list, contentContainer, true)
+        inflater.inflate(R.layout.fragment_movie_recommendations, contentContainer, true)
         return parentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        getMovieList()
+        getMovieRecommendations()
     }
 
     override fun onResume() {
@@ -50,9 +52,9 @@ class MovieListFragment : BaseFragment() {
     }
 
     private fun adapterProcess() {
-        movieListAdapter = MovieListAdapter(
+        movieListAdapter = MovieRecommendationsAdapter(
             mContext,
-            moviesList,
+            moviesRecommendations,
             onItemClicked = { resultsItem: MovieResultsResponse? ->
                 FragmentUtil.replaceFragment(
                     activity as AppCompatActivity,
@@ -61,22 +63,17 @@ class MovieListFragment : BaseFragment() {
                     TAG = MovieDetailsFragment.TAG
                 )
             })
-        rvMoviesList?.adapter = movieListAdapter
+        rvMoviesRecommendations?.adapter = movieListAdapter
     }
 
-    private fun getMovieList() {
-        moviesList?.clear()
-        pbLoader.visibility = View.VISIBLE
-        movieListViewModel.callGetMovieList(1, 1, "vote_average.desc")
+    private fun getMovieRecommendations() {
+        moviesRecommendations?.clear()
+        pbLoaderRecomm.visibility = View.VISIBLE
+        movieRecommendationsViewModel.callGetMovieRecommendations(movieId!!)
             .observe(this, Observer {
-                pbLoader.visibility = View.GONE
+                pbLoaderRecomm.visibility = View.GONE
                 if (!it?.results.isNullOrEmpty()) {
-
-                    moviesList = it?.results!!
-//                    GlobalScope.launch {
-//                        postsViewModel.callDeletePostsLocally()
-//                        postsViewModel.savePosts(postsList!!)
-//                    }
+                    moviesRecommendations = it?.results!!
                     adapterProcess()
                 } else {
                     Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_LONG).show()
@@ -85,6 +82,6 @@ class MovieListFragment : BaseFragment() {
     }
 
     companion object {
-        val TAG: String = MovieListFragment::class.java.simpleName
+        val TAG: String = MovieRecommendationsFragment::class.java.simpleName
     }
 }
