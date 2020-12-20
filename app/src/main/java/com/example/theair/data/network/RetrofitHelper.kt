@@ -5,6 +5,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+// RetrofitHelper class is used to make a singlton from retrofit to user over the app to
+// make network calls to APIs
 object RetrofitHelper {
 
     private const val APP_BASE_URL = "https://api.themoviedb.org/"
@@ -33,9 +35,4 @@ object RetrofitHelper {
         return appInstance
     }
 
-//    private fun getLoggingInterceptor(): HttpLoggingInterceptor {
-//        val interceptor = HttpLoggingInterceptor()
-//        interceptor.level = HttpLoggingInterceptor.Level.BODY
-//        return interceptor
-//    }
 }

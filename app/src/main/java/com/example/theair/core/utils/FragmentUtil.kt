@@ -7,6 +7,7 @@ import com.example.theair.core.helpers.TransitionType
 
 object FragmentUtil {
 
+    // here addFragment() fun for adding activity
     fun addFragment(
         activity: AppCompatActivity,
         fragment: Fragment,
@@ -44,6 +45,7 @@ object FragmentUtil {
         transaction.commit()
     }
 
+    // here this fun for replacing activity
     fun replaceFragment(
         activity: AppCompatActivity,
         fragment: Fragment,

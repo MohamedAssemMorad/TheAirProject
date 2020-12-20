@@ -57,6 +57,7 @@ class MovieCastFragment : BaseFragment() {
         toolbarProcess()
     }
 
+    // call get movies cast APIs to get list of cast and crew
     private fun getMovieCast() {
         moviesCast?.clear()
         pbLoader.visibility = View.VISIBLE
@@ -72,6 +73,7 @@ class MovieCastFragment : BaseFragment() {
             })
     }
 
+    // creating the adapter for list
     private fun adapterProcess() {
         movieCastAdapter = MovieCastAdapter(
             mContext,

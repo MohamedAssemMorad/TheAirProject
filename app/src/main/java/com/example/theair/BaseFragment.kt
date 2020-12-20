@@ -72,6 +72,7 @@ open class BaseFragment : Fragment() {
         super.onPause()
     }
 
+    // add back button to toolbar
     open fun toolbarProcess() {
         homeToolbar.showBackIcon(activity as AppCompatActivity)
         //homeToolbar.hideMenu()
@@ -90,6 +91,7 @@ open class BaseFragment : Fragment() {
         }
     }
 
+    //Register broadcast reciver for internet connectivity check
     private fun registerBroadcasts() {
         val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         mContext.registerReceiver(broadcastReceiver, intentFilter)

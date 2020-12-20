@@ -10,6 +10,7 @@ import com.example.theair.presentation.view.fragment.MovieListFragment
 import com.example.theair.presentation.view.fragment.MovieRecommendationsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
+// here in this class we init bottom navigation bar and move to main fragment
 class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,11 +45,5 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
-    private fun setCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container_fragment, fragment)
-            commit()
-        }
 
 }

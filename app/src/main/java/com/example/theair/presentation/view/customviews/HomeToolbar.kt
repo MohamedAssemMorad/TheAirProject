@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.theair.R
 
+// custom view for toolbar
 class HomeToolbar : Toolbar {
 
     constructor(context: Context?) : super(context) {

@@ -55,6 +55,7 @@ class MovieDetailsFragment : BaseFragment() {
         toolbarProcess()
     }
 
+    // get movie details by movieId
     private fun getMovieDetails() {
         pbLoader.visibility = View.VISIBLE
         movieDetailsViewModel.callGetMovieDetails(movieId ?: 0)
@@ -72,6 +73,7 @@ class MovieDetailsFragment : BaseFragment() {
         movieId = arguments?.getInt(MOVIE_DETAILS)
     }
 
+    // set data for movie details screen for selected movie from list screen
     private fun setAllData(movieDetail: MovieDetailResponse) {
 
         tvTitleDetail.text = movieDetail?.title

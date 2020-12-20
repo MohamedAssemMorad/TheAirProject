@@ -9,6 +9,7 @@ import org.koin.core.context.startKoin
 
 class TheAirApplication : Application() {
 
+    // here using Koin we start our app and register module ands and repo and viewModels
     override fun onCreate() {
         super.onCreate()
 
